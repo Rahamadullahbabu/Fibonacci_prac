@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fibonacci Sequence Display</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div style="text-align: center; margin: 50px">
+      <label for="number">Enter a number to generate Fibonacci sequence:</label>
+      <input type="number" id="number" placeholder="Enter a number" />
+
+      <button onclick="generateFibonacciSequence()">Generate Sequence</button>
+
+      <p id="result">Fibonacci sequence will appear here.</p>
+
+      <script>
+        function generateFibonacciSequence() {
+          const inputValue = document.getElementById("number").value;
+
+          if (inputValue === "" || isNaN(inputValue) || inputValue < 0) {
+            alert("Please enter a valid non-negative number.");
+            return;
+          }
+
+          const fibonacciSequence = calculateFibonacciSequence(inputValue);
+
+          document.getElementById(
+            "result"
+          ).innerHTML = `Fibonacci sequence up to ${inputValue}: ${fibonacciSequence.join(
+            ", "
+          )}`;
+
+          if (fibonacciSequence.includes(Number(inputValue))) {
+            document.getElementById("result").innerHTML +=
+              "<br>This is a Fibonacci number.";
+          } else {
+            document.getElementById("result").innerHTML +=
+              "<br>This is not a Fibonacci number.";
+          }
+        }
+
+        function calculateFibonacciSequence(limit) {
+          const sequence = [];
+          let num1 = 0,
+            num2 = 1,
+            sum;
+
+          while (num1 <= limit) {
+            sequence.push(num1);
+            sum = num1 + num2;
+            num1 = num2;
+            num2 = sum;
+          }
+
+          return sequence;
+        }
+      </script>
+    </div>
+  </body>
+</html>
